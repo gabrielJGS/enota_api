@@ -1,10 +1,9 @@
-import os
-user = os.environ['FLASK_APP']
-
-from flask import Flask
+import json
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
 @app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+def index():
+    return jsonify({'name': 'alice',
+                    'email': 'alice@outlook.com'})

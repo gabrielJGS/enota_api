@@ -4,15 +4,26 @@ from selenium.webdriver.common.by import By
 from models.notaLoja import notaLoja
 from models.notaItem import notaItem
 import json
+from dotenv import load_dotenv
+load_dotenv()
 
+import os
 
 def scraper(notaUrl):
     if(notaUrl.find("http://www4.fazenda.rj.gov.br/consultaNFCe/QRCode") < 0):
         return {"message": "É necessário informar uma url válida para consultaNFCe"}
     try:
         # selenium instantiation
-        browser = webdriver.Chrome()
+        #browser = webdriver.Chrome()
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--no-sandbox")
+        browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
         browser.get(notaUrl)
+
         # get info from store
         lojaInfo = browser.find_element(By.CLASS_NAME, 'txtCenter')
         lojaDivs = lojaInfo.find_elements(By.TAG_NAME, 'div')

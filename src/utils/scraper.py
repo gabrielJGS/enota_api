@@ -7,6 +7,8 @@ import json
 import os
 
 def scraper(notaUrl):
+    print("notaUrl")
+    print(notaUrl)
     if(notaUrl.find("http://www4.fazenda.rj.gov.br/consultaNFCe/QRCode") < 0):
         return {"message": "É necessário informar uma url válida para consultaNFCe"}
     try:

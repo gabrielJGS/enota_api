@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    notaUrl = request.args.get("url")
+    notaUrl = request.args.get("url") if(request.args.get("url")) else ""
     jsonNota = scraper(notaUrl)
     return jsonNota
 

@@ -1,6 +1,7 @@
 #imports
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from src.models.notaLoja import notaLoja
 from src.models.notaItem import notaItem
 import json
 
@@ -8,6 +9,11 @@ import json
 browser = webdriver.Chrome(
     executable_path=r'C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe')
 browser.get('http://www4.fazenda.rj.gov.br/consultaNFCe/QRCode?p=33220405868574001252653190000597541667304140|2|1|1|fe0ec1aa2fdcc6587380ec410936c618dca7ee03')
+
+#get info from store
+lojaInfo = browser.find_element(By.CLASS_NAME, 'txtCenter')
+lojaDivs = lojaInfo.find_elements(By.TAG_NAME, 'div')
+loja = notaLoja(lojaDivs[0].text,lojaDivs[1].text,lojaDivs[2].text, [])
 
 #get items from table
 table = browser.find_element(By.ID, 'tabResult')
@@ -27,5 +33,6 @@ for row in table.find_elements(By.CSS_SELECTOR, 'tr'):
     obj.format_items()
     items.append(obj)
 #end of for
-print(json.dumps(items, default=vars))
+loja.items = items
+print(json.dumps(loja, default=vars))
 browser.quit()

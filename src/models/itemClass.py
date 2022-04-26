@@ -1,10 +1,10 @@
 class itemClass:
-  def __init__(self, txtTit, RCod, Rqtd, RUN, RvlUnit):
-      self.txtTit = txtTit
-      self.RCod = RCod
-      self.Rqtd = Rqtd
-      self.RUN = RUN
-      self.RvlUnit = RvlUnit
+  def __init__(self, nome, cod, qtd, un_tipo, vl_unit):
+      self.nome = nome
+      self.cod = cod
+      self.qtd = qtd
+      self.un_tipo = un_tipo
+      self.vl_unit = vl_unit
 
   def __init__(self):
     self

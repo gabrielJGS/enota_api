@@ -14,11 +14,11 @@ for row in table.find_elements(By.CSS_SELECTOR, 'tr'):
     obj = itemClass()
     row = row.find_elements(By.TAG_NAME, 'td')
     row = row[0]
-    obj.txtTit = row.find_element(By.CLASS_NAME, 'txtTit').text
-    obj.RCod = row.find_element(By.CLASS_NAME, 'RCod').text
-    obj.Rqtd = row.find_element(By.CLASS_NAME, 'Rqtd').text
-    obj.RUN = row.find_element(By.CLASS_NAME, 'RUN').text
-    obj.RvlUnit = row.find_element(By.CLASS_NAME, 'RvlUnit').text
+    obj.nome = row.find_element(By.CLASS_NAME, 'txtTit').text
+    obj.cod = (row.find_element(By.CLASS_NAME, 'RCod').text).replace("(C\u00f3digo: ","").replace(" )","")
+    obj.qtd = (row.find_element(By.CLASS_NAME, 'Rqtd').text).replace("Qtde.:","")
+    obj.un_tipo = (row.find_element(By.CLASS_NAME, 'RUN').text).replace("UN: ","")
+    obj.vl_unit = (row.find_element(By.CLASS_NAME, 'RvlUnit').text).replace("Vl. Unit.:   ","")
     items.append(obj)
-print(json.dumps(items[0], default=vars))
+print(json.dumps(items, default=vars))
 browser.quit()

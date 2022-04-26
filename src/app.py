@@ -1,9 +1,8 @@
-import json
-from flask import Flask, jsonify, request
-
+from flask import Flask, request
+from utils.scraper import scraper
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return jsonify({'name': 'alice',
-                    'email': 'alice@outlook.com'})
+    jsonNota = scraper()
+    return jsonNota

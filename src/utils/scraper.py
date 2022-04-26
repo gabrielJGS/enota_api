@@ -4,8 +4,6 @@ from selenium.webdriver.common.by import By
 from ..models.notaLoja import notaLoja
 from ..models.notaItem import notaItem
 import json
-from dotenv import load_dotenv
-load_dotenv()
 import os
 
 def scraper(notaUrl):

@@ -4,5 +4,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    jsonNota = scraper()
+    notaUrl = request.args.get("url")
+    jsonNota = scraper(notaUrl)
     return jsonNota

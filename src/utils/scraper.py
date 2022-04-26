@@ -4,11 +4,11 @@ from selenium.webdriver.common.by import By
 from models.notaLoja import notaLoja
 from models.notaItem import notaItem
 import json
-def scraper():
+def scraper(notaUrl):
     # selenium instantiation
     browser = webdriver.Chrome(
         executable_path=r'C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe')
-    browser.get('http://www4.fazenda.rj.gov.br/consultaNFCe/QRCode?p=33220405868574001252653190000597541667304140|2|1|1|fe0ec1aa2fdcc6587380ec410936c618dca7ee03')
+    browser.get(notaUrl)
 
     # get info from store
     lojaInfo = browser.find_element(By.CLASS_NAME, 'txtCenter')
@@ -17,7 +17,6 @@ def scraper():
 
     # get items from table
     table = browser.find_element(By.ID, 'tabResult')
-    tbody = table.find_element(By.TAG_NAME, 'tbody')
     items = []
     for row in table.find_elements(By.CSS_SELECTOR, 'tr'):
         # get first td whereas contain obj data

@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from models.notaLoja import notaLoja
 from models.notaItem import notaItem
 import json
-import sys
+
 
 def scraper(notaUrl):
     if(notaUrl.find("http://www4.fazenda.rj.gov.br/consultaNFCe/QRCode") < 0):
@@ -39,9 +39,7 @@ def scraper(notaUrl):
         loja.items = items
         browser.quit()
         return(json.dumps(loja, default=vars))
-    except Exception as e:
-        print(e, file=sys.stderr)
+    except:
         nomeErro = browser.find_element(By.CLASS_NAME, 'avisoErro').text
         browser.quit()
         return {"message": "Ocorreu um erro: "+nomeErro}
-
